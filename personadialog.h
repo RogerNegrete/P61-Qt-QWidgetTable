@@ -3,7 +3,6 @@
 
 #include <QDialog>
 
-#include "calendario.h"
 #include "persona.h"
 
 namespace Ui {
@@ -23,10 +22,6 @@ signals:
 private slots:
     void on_buttonBox_accepted();
     void on_buttonBox_rejected();
-
-    void on_edadCBox_activated(int index);
-
-    void on_bttnDate_clicked();
 
 private:
     Ui::PersonaDialog *ui;

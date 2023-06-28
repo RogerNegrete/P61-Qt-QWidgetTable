@@ -9,20 +9,17 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    calendario.cpp \
     main.cpp \
     persona.cpp \
     personadialog.cpp \
     principal.cpp
 
 HEADERS += \
-    calendario.h \
     persona.h \
     personadialog.h \
     principal.h
 
 FORMS += \
-    calendario.ui \
     personadialog.ui \
     principal.ui
 
