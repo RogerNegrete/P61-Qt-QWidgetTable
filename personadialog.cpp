@@ -1,4 +1,5 @@
 #include "personadialog.h"
+#include "qcalendar.h"
 #include "ui_personadialog.h"
 
 PersonaDialog::PersonaDialog(QWidget *parent) :
@@ -6,6 +7,7 @@ PersonaDialog::PersonaDialog(QWidget *parent) :
     ui(new Ui::PersonaDialog)
 {
     ui->setupUi(this);
+   connect(ui->edadCBox, SIGNAL(activated(int)), this, SLOT(on_edadCBox_activated(int)));
 }
 
 PersonaDialog::~PersonaDialog()
@@ -32,5 +34,19 @@ void PersonaDialog::on_buttonBox_rejected()
 Persona *PersonaDialog::persona() const
 {
     return m_persona;
+}
+
+
+void PersonaDialog::on_edadCBox_activated(int index)
+{
+
+}
+
+
+void PersonaDialog::on_bttnDate_clicked()
+{
+    Calendario *calendary = new Calendario(this);
+    //calendary->exec();
+    calendary->show();
 }
 

@@ -38,6 +38,7 @@ void Principal::on_btnAgregar_clicked()
     }
     // Recuperar el objeto del cuadro de dialogo
     Persona *p = pd.persona();
+   if (!p->nombre().isEmpty() && !p->apellido().isEmpty() && !p->telefono().isEmpty() && !p->email().isEmpty()) {
     //Agregar a la tabla
     int fila = ui->tblLista->rowCount();
     ui->tblLista->insertRow(fila);
@@ -45,7 +46,7 @@ void Principal::on_btnAgregar_clicked()
     ui->tblLista->setItem(fila, APELLIDO, new QTableWidgetItem(p->apellido()));
     ui->tblLista->setItem(fila, TELEFONO, new QTableWidgetItem(p->telefono()));
     ui->tblLista->setItem(fila, EMAIL, new QTableWidgetItem(p->email()));
-
+}
 }
 
 
