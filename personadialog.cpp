@@ -19,8 +19,7 @@ void PersonaDialog::on_buttonBox_accepted()
     QString apellido = ui->inApellido->text();
     QString telefono = ui->inTelefono->text();
     QString email = ui->inEmail->text();
-    QString fechaNacimientoString = ui->fechaLabel->text();
-    QDate fechaNacimiento = QDate::fromString(fechaNacimientoString, "dd/MM/yyyy");
+    QDate fechaNacimiento = ui->inFecha->date();
     this->m_persona = new Persona(nombre, apellido, telefono, email, fechaNacimiento);
     accept();
 }

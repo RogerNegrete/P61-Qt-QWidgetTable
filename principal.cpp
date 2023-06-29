@@ -13,8 +13,11 @@ Principal::Principal(QWidget *parent)
     // Configurar la tabla
     ui->tblLista->setColumnCount(5);
     QStringList titulo;
-    titulo << "Nombre" << "Apellido" << "Teléfono" << "E-mail" << "Añio";
+    titulo << "Nombre" << "Apellido"<< "Añio" << "Teléfono" << "E-mail" ;
     ui->tblLista->setHorizontalHeaderLabels(titulo);
+    ui->tblLista->horizontalHeader()->setStyleSheet("QHeaderView::section { font-size: 13pt; }");
+    ui->tblLista->setStyleSheet("QTableView { font-size: 10pt; }");
+    ui->tblLista->setColumnWidth(EMAIL, 200);
     // Leer desde el archivo
     cargarContactos();
 
@@ -40,15 +43,18 @@ void Principal::on_btnAgregar_clicked()
     Persona *p = pd.persona();
     int edad = p->calcularEdad();
     QString edadString = QString::number(edad);
-    if (!p->nombre().isEmpty() && !p->apellido().isEmpty() && !p->telefono().isEmpty() && !p->email().isEmpty() && !p->fechaNacimiento().isValid())  {
+    if (!p->nombre().isEmpty() && !p->apellido().isEmpty() && !p->telefono().isEmpty() && !p->email().isEmpty() )  {
     //Agregar a la tabla
     int fila = ui->tblLista->rowCount();
+
     ui->tblLista->insertRow(fila);
     ui->tblLista->setItem(fila, NOMBRE, new QTableWidgetItem(p->nombre()));
     ui->tblLista->setItem(fila, APELLIDO, new QTableWidgetItem(p->apellido()));
+    ui->tblLista->setItem(fila, ANIO, new QTableWidgetItem(edadString));
     ui->tblLista->setItem(fila, TELEFONO, new QTableWidgetItem(p->telefono()));
     ui->tblLista->setItem(fila, EMAIL, new QTableWidgetItem(p->email()));
-    ui->tblLista->setItem(fila, ANIO, new QTableWidgetItem(edadString));
+
+
 }
 }
 
@@ -71,8 +77,8 @@ void Principal::on_btnGuardar_clicked()
             QTableWidgetItem *telefono = ui->tblLista->item(i, TELEFONO);
             QTableWidgetItem *email = ui->tblLista->item(i, EMAIL);
             QTableWidgetItem *anio =ui->tblLista->item(i,ANIO);
-            salida << nombre->text() << ";" << apellido->text() << ";";
-            salida << telefono->text() << ";" << email->text() << ";" <<anio->text() << "\n";
+            salida << nombre->text() << ";" << apellido->text() << ";"<<anio->text()<< ";";
+            salida << telefono->text() << ";" << email->text()<< "\n";
         }
         archivo.close();
         QMessageBox::information(this,"Guardar contactos","Contactos guardados con éxito");
