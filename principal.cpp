@@ -11,9 +11,9 @@ Principal::Principal(QWidget *parent)
     ui->setupUi(this);
     setWindowTitle("Agenda telefónica");
     // Configurar la tabla
-    ui->tblLista->setColumnCount(4);
+    ui->tblLista->setColumnCount(5);
     QStringList titulo;
-    titulo << "Nombre" << "Apellido" << "Teléfono" << "E-mail";
+    titulo << "Nombre" << "Apellido" << "Teléfono" << "E-mail" << "Añio";
     ui->tblLista->setHorizontalHeaderLabels(titulo);
     // Leer desde el archivo
     cargarContactos();
@@ -38,7 +38,9 @@ void Principal::on_btnAgregar_clicked()
     }
     // Recuperar el objeto del cuadro de dialogo
     Persona *p = pd.persona();
-   if (!p->nombre().isEmpty() && !p->apellido().isEmpty() && !p->telefono().isEmpty() && !p->email().isEmpty()) {
+    int edad = p->calcularEdad();
+    QString edadString = QString::number(edad);
+    if (!p->nombre().isEmpty() && !p->apellido().isEmpty() && !p->telefono().isEmpty() && !p->email().isEmpty() && !p->fechaNacimiento().isValid())  {
     //Agregar a la tabla
     int fila = ui->tblLista->rowCount();
     ui->tblLista->insertRow(fila);
@@ -46,6 +48,7 @@ void Principal::on_btnAgregar_clicked()
     ui->tblLista->setItem(fila, APELLIDO, new QTableWidgetItem(p->apellido()));
     ui->tblLista->setItem(fila, TELEFONO, new QTableWidgetItem(p->telefono()));
     ui->tblLista->setItem(fila, EMAIL, new QTableWidgetItem(p->email()));
+    ui->tblLista->setItem(fila, ANIO, new QTableWidgetItem(edadString));
 }
 }
 
@@ -67,8 +70,9 @@ void Principal::on_btnGuardar_clicked()
             QTableWidgetItem *apellido = ui->tblLista->item(i, APELLIDO);
             QTableWidgetItem *telefono = ui->tblLista->item(i, TELEFONO);
             QTableWidgetItem *email = ui->tblLista->item(i, EMAIL);
+            QTableWidgetItem *anio =ui->tblLista->item(i,ANIO);
             salida << nombre->text() << ";" << apellido->text() << ";";
-            salida << telefono->text() << ";" << email->text() << "\n";
+            salida << telefono->text() << ";" << email->text() << ";" <<anio->text() << "\n";
         }
         archivo.close();
         QMessageBox::information(this,"Guardar contactos","Contactos guardados con éxito");
@@ -99,6 +103,7 @@ void Principal::cargarContactos()
             ui->tblLista->setItem(fila, APELLIDO, new QTableWidgetItem(datos[APELLIDO]));
             ui->tblLista->setItem(fila, TELEFONO, new QTableWidgetItem(datos[TELEFONO]));
             ui->tblLista->setItem(fila, EMAIL, new QTableWidgetItem(datos[EMAIL]));
+            ui->tblLista->setItem(fila, ANIO, new QTableWidgetItem(datos[ANIO]));
         }
         archivo.close();
     }

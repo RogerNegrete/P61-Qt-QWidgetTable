@@ -30,7 +30,7 @@ private:
     const QString ARCHIVO = "agenda.csv";
     enum Columna
     {
-        NOMBRE, APELLIDO, TELEFONO, EMAIL
+        NOMBRE, APELLIDO, TELEFONO, EMAIL, ANIO
     };
 
     void cargarContactos();
