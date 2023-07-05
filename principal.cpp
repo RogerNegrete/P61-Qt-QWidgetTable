@@ -13,7 +13,7 @@ Principal::Principal(QWidget *parent)
     // Configurar la tabla
     ui->tblLista->setColumnCount(5);
     QStringList titulo;
-    titulo << "Nombre" << "Apellido"<< "Añio" << "Teléfono" << "E-mail" ;
+    titulo << tr("Nombre") << tr("Apellido")<< tr("Añio") << tr("Teléfono") << tr("E-mail");
     ui->tblLista->setHorizontalHeaderLabels(titulo);
     ui->tblLista->horizontalHeader()->setStyleSheet("QHeaderView::section { font-size: 13pt; }");
     ui->tblLista->setStyleSheet("QTableView { font-size: 10pt; }");

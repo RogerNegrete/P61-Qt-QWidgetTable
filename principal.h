@@ -23,6 +23,7 @@ public:
 private slots:
     void on_btnAgregar_clicked();
 
+
     void on_btnGuardar_clicked();
 
 private:
